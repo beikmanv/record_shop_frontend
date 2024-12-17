@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Declare variables
     private RecyclerView recyclerView;
-    private ArrayList<Album> albums = new ArrayList<>();
+    private ArrayList<Album> albums;
     private AlbumAdapter albumAdapter;
     private MainActivityViewModel mainActivityViewModel;
     private ActivityMainBinding binding;

@@ -24,10 +24,10 @@ public class Album extends BaseObservable {
     private String updatedAt;
     private String message;
 
-    private int imageResource;
+    private String imageResource; // Add this field
 
     public Album(int albumId, int artistId, String artistName, String title, String genre, int releaseYear,
-                 int stock, double price, String createdAt, String updatedAt, String message, int imageResource) {
+                 int stock, double price, String createdAt, String updatedAt, String message, String imageResource) {
         this.albumId = albumId;
         this.artistId = artistId;
         this.artistName = artistName;
@@ -130,11 +130,11 @@ public class Album extends BaseObservable {
     }
 
     @Bindable
-    public int getImageResource() {
+    public String getImageResource() {
         return imageResource;
     }
 
-    public void setImageResource(int imageResource) {
+    public void setImageResource(String imageResource) {
         this.imageResource = imageResource;
         notifyPropertyChanged(BR.imageResource);
     }
