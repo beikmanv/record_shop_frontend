@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AlbumAdapter albumAdapter;
     private AlbumRepository albumRepository;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
