@@ -13,8 +13,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AlbumRepository {
-    private final MutableLiveData<List<Album>> mutableLiveData = new MutableLiveData<>();
 
+    private final MutableLiveData<List<Album>> mutableLiveData = new MutableLiveData<>();
     private final Application application;
 
     // Constructor to accept the Application object
@@ -30,15 +30,14 @@ public class AlbumRepository {
         // Make the asynchronous network call
         call.enqueue(new Callback<List<Album>>() {
             @Override
+            // This method is triggered when the API request is successful
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 if (response.body() != null) {
                     List<Album> albums = response.body();
-
                     // Log artist names in the response
                     for (Album album : albums) {
                         Log.d("AlbumInfo", "Artist Name: " + album.getArtistName()); // Log artist name
                     }
-
                     // Update the LiveData with the fetched albums
                     mutableLiveData.setValue(albums);
                 } else {
@@ -47,6 +46,7 @@ public class AlbumRepository {
             }
 
             @Override
+            //This method is called if the API request fails (e.g., if there's a network error)
             public void onFailure(Call<List<Album>> call, Throwable t) {
                 // Handle failure case
                 Log.e("AlbumInfo", "API call failed: " + t.getMessage());

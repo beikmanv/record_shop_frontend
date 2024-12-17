@@ -13,14 +13,18 @@ import java.util.List;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-    private AlbumRepository albumRepository;
+    private final AlbumRepository albumRepository;
 
+    // Constructor for the ViewModel
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
-        this.albumRepository = new AlbumRepository(application);
+        // Initialize the AlbumRepository with the application context
+        albumRepository = new AlbumRepository(application);
     }
 
+    // Getter method to access the LiveData of Albums
     public LiveData<List<Album>> getAlbums() {
         return albumRepository.getMutableLiveData();
     }
 }
+

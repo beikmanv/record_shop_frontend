@@ -16,15 +16,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// The AlbumAdapter is a bridge between the data (a list of albums) and the UI (the RecyclerView)
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
-    private List<Album> albumList;
-    private final List<Integer> availableImages;  // To hold available images
-    private int imageIndex = 0;  // Index for the current image in the list
+
+    private List<Album> albumList; // The data to display (a list of Album objects)
+    private final List<Integer> availableImages;  // List of random images for albums
+    private int imageIndex = 0;  // Keeps track of which image to assign next
 
     public AlbumAdapter(List<Album> albumList) {
         this.albumList = albumList;
         this.availableImages = new ArrayList<>();
-
         // Initialize the available image list and shuffle it once
         Collections.addAll(availableImages,
                 R.drawable.album1, R.drawable.album2, R.drawable.album3,
@@ -36,29 +37,29 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     @NonNull
     @Override
+    // Instead of searching for the views every time (using findViewById), the ViewHolder holds references to them
     public AlbumViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Inflate the layout for a single row (album_item.xml)
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.album_item, parent, false);
-        return new AlbumViewHolder(view);
+        return new AlbumViewHolder(view); // Return a new ViewHolder with this layout
     }
 
     @Override
+    // This is where the actual data (album title, artist, etc.) is placed into the UI for each row
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         Album album = albumList.get(position);
-
         // Set text views
         holder.albumTitle.setText(album.getTitle());
         holder.artistName.setText(album.getArtistName());
         holder.genreReleaseYear.setText(album.getGenre() + " | " + album.getReleaseYear());
         holder.price.setText("£" + album.getPrice());
-
         // Set album image, ensure it's a valid index before using the image list
         if (imageIndex >= availableImages.size()) {
             // Refill and shuffle images once the list is exhausted
             Collections.shuffle(availableImages);  // Shuffle images
             imageIndex = 0;  // Reset index
         }
-
         // Set the image for the album
         holder.albumImage.setImageResource(availableImages.get(imageIndex));
         imageIndex++;  // Increment the index for the next image
@@ -69,16 +70,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         return albumList.size();
     }
 
-    // Method to update the album list
-    public void setAlbumList(List<Album> albumList) {
-        this.albumList = albumList;
-        notifyDataSetChanged(); // Notify the adapter that the data has changed
-    }
-
+    // The ViewHolder acts as a shortcut for finding and holding all the views (like TextView, ImageView)
+    // in each item row of the RecyclerView. It improves performance by avoiding repeated calls to findViewById().
     public static class AlbumViewHolder extends RecyclerView.ViewHolder {
         TextView albumTitle, artistName, genreReleaseYear, price;
         ImageView albumImage;
-
         public AlbumViewHolder(@NonNull View itemView) {
             super(itemView);
             albumTitle = itemView.findViewById(R.id.albumTitle);

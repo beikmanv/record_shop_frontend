@@ -53,11 +53,13 @@ public class MainActivity extends AppCompatActivity {
     private void displayInRecyclerView() {
         // Initialize RecyclerView
         recyclerView = binding.recyclerView; // Gets the RecyclerView from the layout
+        // Pass the album list to the adapter
         albumAdapter = new AlbumAdapter(albums); // Pass the album list to the adapter
         // Set adapter to RecyclerView
-        recyclerView.setAdapter(albumAdapter);
-        // Set the layout manager
+        recyclerView.setAdapter(albumAdapter); // Each album gets displayed as an item
+        // Set the layout manager (otherwise RecyclerView doesn't know where or how position the items)
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL); // Redundant line, vertical by default
         recyclerView.setLayoutManager(layoutManager);
         // Set fixed size for performance
         recyclerView.setHasFixedSize(true);
