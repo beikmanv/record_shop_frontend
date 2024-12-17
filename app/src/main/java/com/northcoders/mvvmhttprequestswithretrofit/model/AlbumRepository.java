@@ -25,7 +25,7 @@ public class AlbumRepository {
     public MutableLiveData<List<Album>> getMutableLiveData() {
         // Make the API call to fetch albums
         AlbumApiService albumApiService = RetrofitInstance.getService();
-        Call<List<Album>> call = albumApiService.getAllAlbums();  // Replace with your actual API service method
+        Call<List<Album>> call = albumApiService.getAllAlbums();
 
         // Make the asynchronous network call
         call.enqueue(new Callback<List<Album>>() {

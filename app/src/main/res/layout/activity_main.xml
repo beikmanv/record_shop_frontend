@@ -6,8 +6,8 @@
     <!-- The data section where variables for binding will be declared -->
     <data>
         <variable
-            name="albumList"
-            type="com.northcoders.mvvmhttprequestswithretrofit.model.Album" />
+            name="albumAdapter"
+            type="com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter" />
     </data>
 
     <!-- Main ConstraintLayout containing the RecyclerView -->
@@ -29,13 +29,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/recycler_view_background"
-            app:adapter="@{albumList}" />
+            app:adapter="@{albumAdapter}" />
 
         <!-- TextView that might display any relevant message, placed at the top or bottom -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Album List"
             android:textSize="36sp"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
