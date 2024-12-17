@@ -1,89 +1,105 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    android:layout_margin="8dp"
-    tools:context=".MainActivity"
-    android:background="@color/cardview_background"> <!-- Set background color for CardView -->
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Define the variable for binding -->
+    <data>
+        <variable
+            name="album"
+            type="com.northcoders.mvvmhttprequestswithretrofit.model.Album" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/constraint_layout_background"> <!-- Set background color for ConstraintLayout -->
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_margin="8dp"
+        tools:context=".ui.mainactivity.MainActivity"
+        android:background="@color/cardview_background">
 
-        <!-- Image of Album Cover (Square) -->
-        <ImageView
-            android:id="@+id/albumImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/album_cover"
-            android:src="@android:drawable/ic_menu_gallery"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:scaleType="centerCrop"
-            android:background="@color/image_background" /> <!-- Optional: set background color for image -->
-
-        <!-- Album Title -->
-        <TextView
-            android:id="@+id/albumTitle"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/title_text_color"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toEndOf="@id/albumImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/artistName"/>
+            android:background="@color/constraint_layout_background">
 
-        <!-- Artist Name -->
-        <TextView
-            android:id="@+id/artistName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold|italic"
-            android:textSize="14sp"
-            android:textColor="@color/artist_text_color"
-        android:layout_marginStart="15dp"
-        app:layout_constraintStart_toEndOf="@id/albumImage"
-        app:layout_constraintTop_toBottomOf="@id/albumTitle"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <!-- Image of Album Cover (Square) -->
+            <ImageView
+                android:id="@+id/albumImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/album_cover"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:scaleType="centerCrop"
+                android:background="@color/image_background"
+                android:src="@{album.imageResource}" /> <!-- Bind the album image URL -->
 
-        <!-- Genre and Release Year -->
-        <TextView
-            android:id="@+id/genreReleaseYear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="@color/genre_text_color"
-        android:layout_marginStart="15dp"
-        app:layout_constraintStart_toEndOf="@id/albumImage"
-        app:layout_constraintTop_toBottomOf="@id/artistName"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <!-- Album Title -->
+            <TextView
+                android:id="@+id/albumTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/title_text_color"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@id/albumImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/artistName"
+                android:text="@{album.title}" /> <!-- Bind the album title -->
 
-        <!-- Price -->
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/price_text_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/genreReleaseYear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            <!-- Artist Name -->
+            <TextView
+                android:id="@+id/artistName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold|italic"
+                android:textSize="14sp"
+                android:textColor="@color/artist_text_color"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/albumImage"
+                app:layout_constraintTop_toBottomOf="@id/albumTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{album.artistName}" /> <!-- Bind the artist name -->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <!-- Genre and Release Year -->
+            <TextView
+                android:id="@+id/genreReleaseYear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/genre_text_color"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toEndOf="@id/albumImage"
+                app:layout_constraintTop_toBottomOf="@id/artistName"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{album.genre}" /> <!-- Bind the genre -->
+
+            <!-- Price -->
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/price_text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genreReleaseYear"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@{album.price}" /> <!-- Bind the price -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

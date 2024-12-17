@@ -1,23 +1,22 @@
-package com.northcoders.mvvmhttprequestswithretrofit;
+package com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.northcoders.mvvmhttprequestswithretrofit.R;
 import com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter;
-import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
 import com.northcoders.mvvmhttprequestswithretrofit.model.AlbumRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AlbumAdapter albumAdapter;
     private AlbumRepository albumRepository;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

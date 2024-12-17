@@ -2,6 +2,8 @@ package com.northcoders.mvvmhttprequestswithretrofit.model;
 
 import android.app.Application;
 import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.northcoders.mvvmhttprequestswithretrofit.service.AlbumApiService;
 import com.northcoders.mvvmhttprequestswithretrofit.service.RetrofitInstance;
@@ -12,6 +14,13 @@ import retrofit2.Response;
 
 public class AlbumRepository {
     private final MutableLiveData<List<Album>> mutableLiveData = new MutableLiveData<>();
+
+    private final Application application;
+
+    // Constructor to accept the Application object
+    public AlbumRepository(Application application) {
+        this.application = application;
+    }
 
     public MutableLiveData<List<Album>> getMutableLiveData() {
         // Make the API call to fetch albums
