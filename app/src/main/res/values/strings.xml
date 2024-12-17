@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MVVM HTTP Requests with Retrofit</string>
+    <string name="album_cover">Album Cover</string>
+
+</resources>

@@ -1,0 +1,92 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_margin="8dp"
+    tools:context=".MainActivity"
+    android:background="@color/cardview_background"> <!-- Set background color for CardView -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/constraint_layout_background"> <!-- Set background color for ConstraintLayout -->
+
+        <!-- Image of Album Cover (Square) -->
+        <ImageView
+            android:id="@+id/albumImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/album_cover"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
+            android:background="@color/image_background" /> <!-- Optional: set background color for image -->
+
+        <!-- Album Title -->
+        <TextView
+            android:id="@+id/albumTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Album Title"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/title_text_color"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@id/albumImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/artistName"/>
+
+        <!-- Artist Name -->
+        <TextView
+            android:id="@+id/artistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Artist Name"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/artist_text_color"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toEndOf="@id/albumImage"
+        app:layout_constraintTop_toBottomOf="@id/albumTitle"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Genre and Release Year -->
+        <TextView
+            android:id="@+id/genreReleaseYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Genre | Release Year"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/genre_text_color"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toEndOf="@id/albumImage"
+        app:layout_constraintTop_toBottomOf="@id/artistName"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/price_text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genreReleaseYear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

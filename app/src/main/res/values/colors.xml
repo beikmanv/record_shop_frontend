@@ -1,0 +1,11 @@
+<resources>
+    <color name="constraint_layout_background">#f4d58d</color>
+    <color name="image_background">#fdf0d5</color>
+    <color name="title_text_color">#003049</color>
+    <color name="artist_text_color">#003049</color>
+    <color name="recycler_view_background">#e85d04</color>    <!-- RED -->
+    <color name="cardview_background">#757575</color>
+    <color name="genre_text_color">#003049</color>
+    <color name="price_text_color">#335c67</color>
+    <color name="background_color">#780000</color>
+</resources>
