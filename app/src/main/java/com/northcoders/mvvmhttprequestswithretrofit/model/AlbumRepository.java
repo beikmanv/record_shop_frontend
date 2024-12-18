@@ -2,6 +2,7 @@ package com.northcoders.mvvmhttprequestswithretrofit.model;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -26,7 +27,6 @@ public class AlbumRepository {
         // Make the API call to fetch albums
         AlbumApiService albumApiService = RetrofitInstance.getService();
         Call<List<Album>> call = albumApiService.getAllAlbums();
-
         // Make the asynchronous network call
         call.enqueue(new Callback<List<Album>>() {
             @Override
@@ -44,7 +44,6 @@ public class AlbumRepository {
                     Log.e("AlbumInfo", "No data received");
                 }
             }
-
             @Override
             //This method is called if the API request fails (e.g., if there's a network error)
             public void onFailure(Call<List<Album>> call, Throwable t) {
@@ -55,6 +54,25 @@ public class AlbumRepository {
 
         // Return LiveData to be observed in the UI
         return mutableLiveData;
+    }
+
+    public void addAlbum(Album album) {
+        AlbumApiService albumApiService = RetrofitInstance.getService(); // Get the AlbumApiService instance
+        Call<Album> call = albumApiService.addAlbum(album); // Create a Call object for the POST request
+        call.enqueue(new Callback<Album>() { // Enqueue the call for asynchronous execution
+            @Override
+            public void onResponse(Call<Album> call, Response<Album> response) {
+                Toast.makeText(application.getApplicationContext(), "Album added to database",
+                        Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<Album> call, Throwable t) {
+                Toast.makeText(application.getApplicationContext(), "Unable to add album to database",
+                        Toast.LENGTH_SHORT).show();
+                Log.e("POST onFailure", t.getMessage());
+            }
+        });
+
     }
 }
 

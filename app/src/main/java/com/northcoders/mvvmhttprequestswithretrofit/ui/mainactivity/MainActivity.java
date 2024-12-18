@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter;
 import com.northcoders.mvvmhttprequestswithretrofit.databinding.ActivityMainBinding;
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
+import com.northcoders.mvvmhttprequestswithretrofit.model.AlbumRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private AlbumAdapter albumAdapter;
     private MainActivityViewModel mainActivityViewModel;
     private ActivityMainBinding binding;
+    public AlbumRepository albumRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
                 displayInRecyclerView();
             }
         });
+    }
+
+    private void addAlbum(Album album) {
+        albumRepository.addAlbum(album);
     }
 
     // Method to display the albums in RecyclerView
