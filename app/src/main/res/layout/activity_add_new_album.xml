@@ -7,6 +7,9 @@
         <variable
             name="album"
             type="com.northcoders.mvvmhttprequestswithretrofit.model.Album" />
+        <variable
+            name="handler"
+            type="com.northcoders.mvvmhttprequestswithretrofit.ui.addalbum.AddNewAlbumClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,26 +1,28 @@
 package com.northcoders.mvvmhttprequestswithretrofit.ui.addalbum;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
+import androidx.databinding.DataBindingUtil;
 import com.northcoders.mvvmhttprequestswithretrofit.R;
+import com.northcoders.mvvmhttprequestswithretrofit.databinding.ActivityAddNewAlbumBinding;
+import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.handler.AddNewAlbumClickHandler;
 
 public class AddNewAlbumActivity extends AppCompatActivity {
+
+    private ActivityAddNewAlbumBinding binding;
+    private AddNewAlbumClickHandler handler;
+    private Album album;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_new_album);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_album);
+        album = new Album(); // Initialize with a new Album object
+
+        handler = new AddNewAlbumClickHandler(); // Initialize the click handler
+
+        binding.setAlbum(album); // Bind the album to the layout
+        binding.setHandler(handler); // Set the handler to the layout
     }
 }
