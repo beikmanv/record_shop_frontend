@@ -26,7 +26,6 @@ public class Album extends BaseObservable implements Parcelable {
     private String createdAt;
     private String updatedAt;
     private String message;
-
     private String imageResource;
 
     // Main Constructor
@@ -56,7 +55,7 @@ public class Album extends BaseObservable implements Parcelable {
     protected Album(Parcel in) {
         albumId = in.readInt();
         artistId = in.readInt();
-        artist = in.readParcelable(Artist.class.getClassLoader());
+        artist = in.readParcelable(Artist.class.getClassLoader()); // Ensure Artist implements Parcelable
         artistName = in.readString();
         title = in.readString();
         genre = in.readString();
