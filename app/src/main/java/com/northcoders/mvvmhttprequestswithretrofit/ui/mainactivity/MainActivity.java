@@ -11,7 +11,7 @@ import com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter;
 import com.northcoders.mvvmhttprequestswithretrofit.databinding.ActivityMainBinding;
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
 import com.northcoders.mvvmhttprequestswithretrofit.model.AlbumRepository;
-import com.northcoders.mvvmhttprequestswithretrofit.view.UpdateAlbumActivity;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum.UpdateAlbumActivity;
 
 import java.util.ArrayList;
 import java.util.List;
