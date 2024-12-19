@@ -1,5 +1,7 @@
 package com.northcoders.mvvmhttprequestswithretrofit.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.TextView;
 
 import androidx.databinding.BaseObservable;
@@ -10,7 +12,7 @@ import com.northcoders.mvvmhttprequestswithretrofit.BR;
 
 import java.util.Locale;
 
-public class Album extends BaseObservable {
+public class Album extends BaseObservable implements Parcelable {
 
     private int albumId;
     private int artistId;
@@ -43,25 +45,65 @@ public class Album extends BaseObservable {
         this.updatedAt = updatedAt;
         this.message = message;
         this.imageResource = imageResource;
-
     }
 
+    // Default constructor for Parcelable
     public Album() {
         this.artist = new Artist(0, ""); // Provide default values
     }
 
-    // For GET response only
-    @Bindable
-    public String getArtistName() {
-        return artistName != null ? artistName : (artist != null ? artist.getArtistName() : null);
+    // Parcelable constructor
+    protected Album(Parcel in) {
+        albumId = in.readInt();
+        artistId = in.readInt();
+        artist = in.readParcelable(Artist.class.getClassLoader());
+        artistName = in.readString();
+        title = in.readString();
+        genre = in.readString();
+        releaseYear = in.readInt();
+        stock = in.readInt();
+        price = in.readDouble();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        message = in.readString();
+        imageResource = in.readString();
     }
 
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
-        notifyPropertyChanged(BR.artistName);
+    @Override
+    public int describeContents() {
+        return 0; // No special objects, so return 0
     }
 
-    // Getters and setters with @Bindable for data binding
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(albumId);
+        dest.writeInt(artistId);
+        dest.writeParcelable(artist, flags); // Write Artist object (which should also implement Parcelable)
+        dest.writeString(artistName);
+        dest.writeString(title);
+        dest.writeString(genre);
+        dest.writeInt(releaseYear);
+        dest.writeInt(stock);
+        dest.writeDouble(price);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        dest.writeString(message);
+        dest.writeString(imageResource);
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in); // Create a new Album from the Parcel
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size]; // Create a new array of Album objects
+        }
+    };
+
+    // Getters and setters for the fields, using @Bindable for data binding
     @Bindable
     public int getAlbumId() {
         return albumId;
@@ -90,6 +132,16 @@ public class Album extends BaseObservable {
     public void setArtist(Artist artist) {
         this.artist = artist;
         notifyPropertyChanged(BR.artist);
+    }
+
+    @Bindable
+    public String getArtistName() {
+        return artistName != null ? artistName : (artist != null ? artist.getArtistName() : null);
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+        notifyPropertyChanged(BR.artistName);
     }
 
     @Bindable

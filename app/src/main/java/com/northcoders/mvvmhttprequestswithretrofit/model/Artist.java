@@ -1,6 +1,10 @@
 package com.northcoders.mvvmhttprequestswithretrofit.model;
 
-public class Artist {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Artist implements Parcelable {
+
     private int artistId;
     private String artistName;
 
@@ -15,6 +19,36 @@ public class Artist {
         this.artistId = artistId;
         this.artistName = artistName;
     }
+
+    // Constructor for Parcel
+    protected Artist(Parcel in) {
+        artistId = in.readInt();  // Read artistId from Parcel
+        artistName = in.readString();  // Read artistName from Parcel
+    }
+
+    @Override
+    public int describeContents() {
+        return 0; // No special objects to describe
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(artistId);  // Write artistId to Parcel
+        dest.writeString(artistName);  // Write artistName to Parcel
+    }
+
+    // Creator to recreate the object from Parcel
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);  // Recreate Artist object from Parcel
+        }
+
+        @Override
+        public Artist[] newArray(int size) {
+            return new Artist[size];  // Create an array of Artist objects
+        }
+    };
 
     // Getters and Setters
     public int getArtistId() {
@@ -33,4 +67,3 @@ public class Artist {
         this.artistName = artistName;
     }
 }
-

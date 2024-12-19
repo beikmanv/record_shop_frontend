@@ -53,7 +53,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     public AlbumAdapter(List<Album> albumList) {
         this.albumList = albumList;
-        mediaPlayer = new MediaPlayer(); // Initialize MediaPlayer here
+        mediaPlayer = new MediaPlayer();
     }
 
     @NonNull

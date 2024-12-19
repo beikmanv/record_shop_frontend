@@ -1,5 +1,6 @@
 package com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -10,11 +11,12 @@ import com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter;
 import com.northcoders.mvvmhttprequestswithretrofit.databinding.ActivityMainBinding;
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
 import com.northcoders.mvvmhttprequestswithretrofit.model.AlbumRepository;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum.UpdateAlbumActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     private RecyclerView recyclerView;
     private ArrayList<Album> albums = new ArrayList<>();
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AlbumRepository albumRepository;
     private MainActivityClickHandler handler;
+    public static final String ALBUM_KEY = "album_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,5 +69,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         albumAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        // Get the selected album based on the position
+        Album selectedAlbum = albums.get(position);
+        // Create an intent to open the UpdateAlbumActivity
+        Intent intent = new Intent(MainActivity.this, UpdateAlbumActivity.class);
+        // Use putExtra (Parcelable method) to pass the Album object to the next activity
+        intent.putExtra(ALBUM_KEY, selectedAlbum);
+        // Start the UpdateAlbumActivity
+        startActivity(intent);
     }
 }
