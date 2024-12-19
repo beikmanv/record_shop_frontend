@@ -1,6 +1,7 @@
 package com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,6 +33,8 @@ public class UpdateAlbumActivity extends AppCompatActivity {
             finish();  // Close the activity if Album data is not available
             return;
         }
+
+        Log.d("UpdateAlbumActivity", "Album received: " + album.getTitle());
 
         // Initialize ViewModel using ViewModelProvider
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);

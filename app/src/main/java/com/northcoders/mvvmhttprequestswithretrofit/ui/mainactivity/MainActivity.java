@@ -2,6 +2,7 @@ package com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,31 +20,21 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements RecyclerViewInterface {
 
     private RecyclerView recyclerView;
-    private ArrayList<Album> albums = new ArrayList<>();
+    private ArrayList<Album> albumList = new ArrayList<>();
     private AlbumAdapter albumAdapter;
     private MainActivityViewModel mainActivityViewModel;
     private ActivityMainBinding binding;
     private AlbumRepository albumRepository;
-    private MainActivityClickHandler handler;
-    public static final String ALBUM_KEY = "album_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         // Initialize ViewModel
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-
         // Initialize AlbumRepository
         albumRepository = new AlbumRepository(getApplication());
-
-        // Set up the click handler
-        handler = new MainActivityClickHandler(this);
-        binding.setClickHandler(handler);
-
         // Observe the LiveData and get the list of albums
         getAllAlbums();
     }
@@ -52,10 +43,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         mainActivityViewModel.getAlbums().observe(this, new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumsFromLiveData) {
-                // Ensure you're not resetting the list every time
                 if (albumsFromLiveData != null && !albumsFromLiveData.isEmpty()) {
-                    albums.clear();
-                    albums.addAll(albumsFromLiveData);
+                    albumList.clear();
+                    albumList.addAll(albumsFromLiveData);
                     displayInRecyclerView();
                 }
             }
@@ -64,21 +54,23 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
 
     private void displayInRecyclerView() {
         recyclerView = binding.recyclerView;
-        albumAdapter = new AlbumAdapter(albums);
+        // Pass "this" as the RecyclerViewInterface to handle clicks
+        albumAdapter = new AlbumAdapter(this, albumList, this);
         recyclerView.setAdapter(albumAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         albumAdapter.notifyDataSetChanged();
     }
 
+
+    // Handle item clicks in the RecyclerView
     @Override
     public void onItemClick(int position) {
-        // Get the selected album based on the position
-        Album selectedAlbum = albums.get(position);
-        // Create an intent to open the UpdateAlbumActivity
+        // Create an Intent to navigate to UpdateAlbumActivity
         Intent intent = new Intent(MainActivity.this, UpdateAlbumActivity.class);
-        // Use putExtra (Parcelable method) to pass the Album object to the next activity
-        intent.putExtra(ALBUM_KEY, selectedAlbum);
+        // Pass the selected Album object as a Parcelable
+        intent.putExtra("ALBUM_KEY", albumList.get(position));
+
         // Start the UpdateAlbumActivity
         startActivity(intent);
     }
