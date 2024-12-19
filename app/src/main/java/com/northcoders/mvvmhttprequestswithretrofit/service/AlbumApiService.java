@@ -5,8 +5,11 @@ import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface AlbumApiService {
 
@@ -15,5 +18,16 @@ public interface AlbumApiService {
 
     @POST("album")
     Call<Album> addAlbum(@Body Album album);
+
+    @PUT("album/{id}")
+    Call<Album> updateAlbum(
+            @Path("id") int albumId,
+            @Body Album album
+    );
+
+    @DELETE("album/{id}")
+    Call<Void> deleteAlbum(
+            @Path("id") int albumId
+    );
 
 }
