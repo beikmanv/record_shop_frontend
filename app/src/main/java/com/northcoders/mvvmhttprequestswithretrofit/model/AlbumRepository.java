@@ -118,27 +118,16 @@ public class AlbumRepository {
             @Override
             public void onResponse(Call<Album> call, Response<Album> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(
-                            application.getApplicationContext(),
-                            "Album updated successfully",
-                            Toast.LENGTH_SHORT
+                    Toast.makeText(application.getApplicationContext(), "Album updated successfully", Toast.LENGTH_SHORT
                     ).show();
                 } else {
-                    Toast.makeText(
-                            application.getApplicationContext(),
-                            "Failed to update album: " + response.message(),
-                            Toast.LENGTH_SHORT
-                    ).show();
+                    Toast.makeText(application.getApplicationContext(), "Failed to update album: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Album> call, Throwable t) {
-                Toast.makeText(
-                        application.getApplicationContext(),
-                        "Unable to update album",
-                        Toast.LENGTH_SHORT
-                ).show();
+                Toast.makeText(application.getApplicationContext(), "Unable to update album", Toast.LENGTH_SHORT).show();
                 Log.e("PUT request", t.getMessage());
             }
         });
@@ -152,27 +141,16 @@ public class AlbumRepository {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(
-                            application.getApplicationContext(),
-                            "Album deleted successfully",
-                            Toast.LENGTH_SHORT
-                    ).show();
+                    Toast.makeText(application.getApplicationContext(), "Album deleted successfully", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(
-                            application.getApplicationContext(),
-                            "Failed to delete album: " + response.message(),
-                            Toast.LENGTH_SHORT
+                    Toast.makeText(application.getApplicationContext(), "Failed to delete album: " + response.message(), Toast.LENGTH_SHORT
                     ).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(
-                        application.getApplicationContext(),
-                        "Unable to delete album",
-                        Toast.LENGTH_SHORT
-                ).show();
+                Toast.makeText(application.getApplicationContext(), "Unable to delete album", Toast.LENGTH_SHORT).show();
                 Log.e("DELETE request", t.getMessage());
             }
         });

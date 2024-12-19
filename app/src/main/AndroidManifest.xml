@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MVVMHTTPRequestsWithRetrofit"
         tools:targetApi="31">
         <activity
+            android:name=".ui.updatealbum.UpdateAlbumActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.addalbum.AddAlbumActivity"
             android:exported="false" />
         <activity

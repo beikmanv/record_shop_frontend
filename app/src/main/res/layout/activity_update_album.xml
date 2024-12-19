@@ -1,0 +1,145 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <!-- Bind the Album object -->
+        <variable
+            name="album"
+            type="com.northcoders.mvvmhttprequestswithretrofit.model.Album" />
+        <variable
+            name="clickHandler"
+            type="com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum.UpdateAlbumClickHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- Album Title Input -->
+        <EditText
+            android:id="@+id/editTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter album title"
+            android:text="@={album.title}"
+            android:textColor="@color/artist_text_color"
+            android:textColorHint="@android:color/darker_gray"
+            android:minHeight="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Artist Name Input -->
+        <EditText
+            android:id="@+id/editArtistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter artist name"
+            android:text="@={album.artist.artistName}"
+            android:textColor="@color/artist_text_color"
+            android:textColorHint="@android:color/darker_gray"
+            android:minHeight="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTitle"
+            android:layout_marginTop="16dp" />
+
+        <!-- Genre Input -->
+        <EditText
+            android:id="@+id/editGenre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter genre"
+            android:text="@={album.genre}"
+            android:textColor="@color/artist_text_color"
+            android:textColorHint="@android:color/darker_gray"
+            android:minHeight="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editArtistName"
+            android:layout_marginTop="16dp" />
+
+        <!-- Release Year Input -->
+        <EditText
+            android:id="@+id/editReleaseYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter release year"
+            android:text="@={album.releaseYear}"
+            android:inputType="number"
+            android:textColor="@color/artist_text_color"
+            android:textColorHint="@android:color/darker_gray"
+            android:minHeight="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editGenre"
+            android:layout_marginTop="16dp" />
+
+        <!-- Stock Input -->
+        <EditText
+            android:id="@+id/editStock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter stock quantity"
+            android:text="@={album.stock}"
+            android:inputType="number"
+            android:textColor="@color/artist_text_color"
+            android:textColorHint="@android:color/darker_gray"
+            android:minHeight="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editReleaseYear"
+            android:layout_marginTop="16dp" />
+
+        <!-- Price Input -->
+        <EditText
+            android:id="@+id/editPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter price"
+            android:text="@={album.price}"
+            android:inputType="numberDecimal"
+            android:textColor="@color/artist_text_color"
+            android:textColorHint="@android:color/darker_gray"
+            android:minHeight="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editStock"
+            android:layout_marginTop="16dp" />
+
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:onClick="@{clickHandler::onUpdateBtnClicked}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editPrice"
+            android:layout_marginTop="32dp" />
+
+        <!-- Delete Button -->
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:onClick="@{clickHandler::onDeleteBtnClicked}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editPrice"
+            android:layout_marginTop="32dp" />
+
+        <!-- Back Floating Action Button -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:onClick="@{clickHandler::onBackBtnClicked}"
+            android:src="@drawable/ic_pause_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@android:color/white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
