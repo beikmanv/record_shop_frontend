@@ -8,6 +8,10 @@
         <variable
             name="albumAdapter"
             type="com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter" />
+        <!-- Declare the click handler -->
+        <variable
+            name="clickHandler"
+            type="com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivityClickHandler" />
     </data>
 
     <!-- Main ConstraintLayout containing the RecyclerView -->
@@ -41,6 +45,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Floating Action Button (FAB) -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:onClick="@{clickHandler::onFABClicked}"
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

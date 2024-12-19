@@ -10,9 +10,9 @@ import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivity
 
 public class AddAlbumClickHandler {
 
-    private Album album; // The album object
-    private Context context; // The context
-    private MainActivityViewModel viewModel; // The view model to add the album
+    private Album album;
+    private Context context;
+    private MainActivityViewModel viewModel;
 
     public AddAlbumClickHandler(Album album, Context context, MainActivityViewModel viewModel) {
         this.album = album;
@@ -20,21 +20,17 @@ public class AddAlbumClickHandler {
         this.viewModel = viewModel;
     }
 
-    // Submit button click handler
     public void onSubmitBtnClicked(View view) {
-        if (album.getTitle().isEmpty() || album.getArtistName().isEmpty() || album.getGenre().isEmpty() || album.getPrice() == 0) {
+        if (album.getTitle().isEmpty() || album.getArtist().getArtistName().isEmpty() || album.getGenre().isEmpty() || album.getPrice() == 0) {
             Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show();
         } else {
-            viewModel.addAlbum(album); // Add album using viewModel
+            viewModel.addAlbum(album);
             Toast.makeText(context, "Album added successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(context, MainActivity.class);
-            context.startActivity(intent); // Navigate to MainActivity
+            ((AddAlbumActivity) context).finish(); // End the activity after submission
         }
     }
 
-    // Back button click handler
     public void onBackBtnClicked(View view) {
-        Intent intent = new Intent(context, MainActivity.class);
-        context.startActivity(intent); // Navigate back to MainActivity
+        ((AddAlbumActivity) context).finish(); // End activity and go back to MainActivity
     }
 }

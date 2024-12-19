@@ -13,7 +13,7 @@ import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivity
 public class AddAlbumActivity extends AppCompatActivity {
 
     private ActivityAddNewAlbumBinding binding;
-    private AddAlbumClickHandler handler;
+    private AddAlbumClickHandler clickHandler;
     private Album album;
     private MainActivityViewModel viewModel;
 
@@ -21,20 +21,12 @@ public class AddAlbumActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize DataBinding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_album);
-
-        // Initialize the album object
         album = new Album();
-
-        // Get ViewModel instance using ViewModelProvider
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
-        // Initialize the handler
-        handler = new AddAlbumClickHandler(album, this, viewModel);
-
-        // Bind the album and handler to the layout
+        clickHandler = new AddAlbumClickHandler(album, this, viewModel);
         binding.setAlbum(album);
-        binding.setHandler(handler);
+        binding.setClickHandler(clickHandler);
     }
 }

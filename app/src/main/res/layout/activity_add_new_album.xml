@@ -7,7 +7,7 @@
             name="album"
             type="com.northcoders.mvvmhttprequestswithretrofit.model.Album" />
         <variable
-            name="handler"
+            name="clickHandler"
             type="com.northcoders.mvvmhttprequestswithretrofit.ui.addalbum.AddAlbumClickHandler" />
     </data>
 
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Enter artist name"
-            android:text="@={album.artistName}"
+            android:text="@={album.artist.artistName}"
             android:textColor="@color/artist_text_color"
             android:textColorHint="@android:color/darker_gray"
             android:minHeight="60dp"
@@ -109,16 +109,29 @@
             app:layout_constraintTop_toBottomOf="@id/editStock"
             android:layout_marginTop="16dp" />
 
+        <Button
+            android:id="@+id/submit"
+            android:onClick="@{clickHandler::onSubmitBtnClicked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/add_album"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editGenre" />
+
         <!-- Floating Action Button -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{clickHandler::onSubmitBtnClicked}"
             android:src="@drawable/ic_play_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@android:color/white"
-            android:onClick="@{handler::onSubmitBtnClicked}" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@android:color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

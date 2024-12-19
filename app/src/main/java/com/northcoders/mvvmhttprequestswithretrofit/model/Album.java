@@ -14,7 +14,8 @@ public class Album extends BaseObservable {
 
     private int albumId;
     private int artistId;
-    private String artistName;
+    private Artist artist;
+    private String artistName; // For GET response only
     private String title;
     private String genre;
     private int releaseYear;
@@ -24,12 +25,14 @@ public class Album extends BaseObservable {
     private String updatedAt;
     private String message;
 
-    private String imageResource; // Add this field
+    private String imageResource;
 
-    public Album(int albumId, int artistId, String artistName, String title, String genre, int releaseYear,
+    // Main Constructor
+    public Album(int albumId, int artistId, Artist artist, String artistName, String title, String genre, int releaseYear,
                  int stock, double price, String createdAt, String updatedAt, String message, String imageResource) {
         this.albumId = albumId;
         this.artistId = artistId;
+        this.artist = artist;
         this.artistName = artistName;
         this.title = title;
         this.genre = genre;
@@ -40,66 +43,103 @@ public class Album extends BaseObservable {
         this.updatedAt = updatedAt;
         this.message = message;
         this.imageResource = imageResource;
+
     }
 
-    public Album() {}
+    public Album() {
+        this.artist = new Artist(0, ""); // Provide default values
+    }
+
+    // For GET response only
+    @Bindable
+    public String getArtistName() {
+        return artistName != null ? artistName : (artist != null ? artist.getArtistName() : null);
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+        notifyPropertyChanged(BR.artistName);
+    }
 
     // Getters and setters with @Bindable for data binding
     @Bindable
-    public int getAlbumId() { return albumId; }
+    public int getAlbumId() {
+        return albumId;
+    }
+
     public void setAlbumId(int albumId) {
         this.albumId = albumId;
         notifyPropertyChanged(BR.albumId);
     }
 
     @Bindable
-    public int getArtistId() { return artistId; }
+    public int getArtistId() {
+        return artistId;
+    }
+
     public void setArtistId(int artistId) {
         this.artistId = artistId;
         notifyPropertyChanged(BR.artistId);
     }
 
     @Bindable
-    public String getArtistName() { return artistName; }
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
-        notifyPropertyChanged(BR.artistName);
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+        notifyPropertyChanged(BR.artist);
     }
 
     @Bindable
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
         notifyPropertyChanged(BR.title);
     }
 
     @Bindable
-    public String getGenre() { return genre; }
+    public String getGenre() {
+        return genre;
+    }
+
     public void setGenre(String genre) {
         this.genre = genre;
         notifyPropertyChanged(BR.genre);
     }
 
     @Bindable
-    public int getReleaseYear() { return releaseYear; }
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
         notifyPropertyChanged(BR.releaseYear);
     }
 
     @Bindable
-    public int getStock() { return stock; }
+    public int getStock() {
+        return stock;
+    }
+
     public void setStock(int stock) {
         this.stock = stock;
         notifyPropertyChanged(BR.stock);
     }
 
     @Bindable
-    public double getPrice() { return price; }
+    public double getPrice() {
+        return price;
+    }
 
     @BindingAdapter("android:text")
     public static void setPrice(TextView textView, double price) {
-        String formattedPrice = String.format(Locale.getDefault(), "£%.2f", price);  // Format price as pounds
+        String formattedPrice = String.format(Locale.getDefault(), "£%.2f", price); // Format price as pounds
         textView.setText(formattedPrice);
     }
 
@@ -109,21 +149,30 @@ public class Album extends BaseObservable {
     }
 
     @Bindable
-    public String getCreatedAt() { return createdAt; }
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
         notifyPropertyChanged(BR.createdAt);
     }
 
     @Bindable
-    public String getUpdatedAt() { return updatedAt; }
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
         notifyPropertyChanged(BR.updatedAt);
     }
 
     @Bindable
-    public String getMessage() { return message; }
+    public String getMessage() {
+        return message;
+    }
+
     public void setMessage(String message) {
         this.message = message;
         notifyPropertyChanged(BR.message);

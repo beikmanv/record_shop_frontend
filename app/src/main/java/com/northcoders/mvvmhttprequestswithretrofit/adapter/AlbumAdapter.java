@@ -32,6 +32,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     // Map to hold image names and their corresponding resource IDs
     private static final Map<String, Integer> imageResourceMap = new HashMap<>();
 
+    public void updateAlbums(List<Album> albums) {
+        this.albumList = albums;  // Update the album list
+        notifyDataSetChanged();  // Notify the adapter that the data has changed
+    }
+
     static {
         // Fill the map with the image names and their corresponding drawable resource IDs
         imageResourceMap.put("album1", R.drawable.album1);
