@@ -109,4 +109,74 @@ public class AlbumRepository {
             }
         });
     }
+
+    public void updateAlbum(int id, Album album) {
+        AlbumApiService albumApiService = RetrofitInstance.getService(); // Get the AlbumApiService instance
+        Call<Album> call = albumApiService.updateAlbum(id, album); // Call the update method
+
+        call.enqueue(new Callback<Album>() {
+            @Override
+            public void onResponse(Call<Album> call, Response<Album> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(
+                            application.getApplicationContext(),
+                            "Album updated successfully",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                } else {
+                    Toast.makeText(
+                            application.getApplicationContext(),
+                            "Failed to update album: " + response.message(),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Album> call, Throwable t) {
+                Toast.makeText(
+                        application.getApplicationContext(),
+                        "Unable to update album",
+                        Toast.LENGTH_SHORT
+                ).show();
+                Log.e("PUT request", t.getMessage());
+            }
+        });
+    }
+
+    public void deleteAlbum(int id) {
+        AlbumApiService albumApiService = RetrofitInstance.getService(); // Get the AlbumApiService instance
+        Call<Void> call = albumApiService.deleteAlbum(id); // Call the delete method
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(
+                            application.getApplicationContext(),
+                            "Album deleted successfully",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                } else {
+                    Toast.makeText(
+                            application.getApplicationContext(),
+                            "Failed to delete album: " + response.message(),
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(
+                        application.getApplicationContext(),
+                        "Unable to delete album",
+                        Toast.LENGTH_SHORT
+                ).show();
+                Log.e("DELETE request", t.getMessage());
+            }
+        });
+    }
+
+
 }
