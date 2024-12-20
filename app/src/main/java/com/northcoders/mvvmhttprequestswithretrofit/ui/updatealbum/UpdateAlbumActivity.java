@@ -16,7 +16,6 @@ public class UpdateAlbumActivity extends AppCompatActivity {
     private ActivityUpdateAlbumBinding binding;  // Binding object for the layout
     private UpdateAlbumClickHandler handler;  // Click handler for actions like update or delete
     private Album album;  // The album object to be updated
-//    private MainActivityViewModel viewModel;
     private static final String ALBUM_KEY = "album";
 
     // ViewModel for the activity

@@ -47,13 +47,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         viewModel.getAlbums().observe(this, new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumsFromLiveData) {
-//                if (albumsFromLiveData != null && !albumsFromLiveData.isEmpty()) {
-//                    albumList.clear();
-//                    albumList.addAll(albumsFromLiveData);
                         albumList = (ArrayList<Album>) albumsFromLiveData;
                     displayInRecyclerView();
                 }
-//            }
         });
     }
 

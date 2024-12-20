@@ -8,24 +8,24 @@ import android.util.Log;
 
 public class Artist implements Parcelable {
 
-    private int artistId;
+    private Long artistId;
     private String artistName;
 
     // Default constructor
     public Artist() {
-        this.artistId = 0;  // Default ID
+        this.artistId = 0L;  // Default ID
         this.artistName = "";  // Default name
     }
 
     // Constructor
-    public Artist(int artistId, String artistName) {
+    public Artist(Long artistId, String artistName) {
         this.artistId = artistId;
         this.artistName = artistName;
     }
 
     // Constructor for Parcel
     protected Artist(Parcel in) {
-        artistId = in.readInt();  // Read artistId from Parcel
+        artistId = (long) in.readInt();  // Read artistId from Parcel
         artistName = in.readString();  // Read artistName from Parcel
 
         // Log the created object
@@ -40,7 +40,7 @@ public class Artist implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(artistId);  // Write artistId to Parcel
+        dest.writeInt(Math.toIntExact(artistId));  // Write artistId to Parcel
         dest.writeString(artistName);  // Write artistName to Parcel
 
         // Log the written object
@@ -61,11 +61,11 @@ public class Artist implements Parcelable {
     };
 
     // Getters and Setters
-    public int getArtistId() {
+    public Long getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(int artistId) {
+    public void setArtistId(Long artistId) {
         this.artistId = artistId;
     }
 

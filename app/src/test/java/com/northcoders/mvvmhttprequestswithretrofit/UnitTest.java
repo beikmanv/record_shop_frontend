@@ -12,7 +12,7 @@ public class UnitTest {
     @Test
     public void testAlbumSerialization() {
         // Arrange
-        Artist artist = new Artist(0, "POPPLER");
+        Artist artist = new Artist(0L, "POPPLER");
         Album album = new Album(
                 0,
                 1,

@@ -51,7 +51,7 @@ public class Album extends BaseObservable implements Parcelable {
 
     // Default constructor for Parcelable
     public Album() {
-        this.artist = new Artist(0, ""); // Provide default values
+        this.artist = new Artist(0L, ""); // Provide default values
     }
 
     // Parcelable constructor

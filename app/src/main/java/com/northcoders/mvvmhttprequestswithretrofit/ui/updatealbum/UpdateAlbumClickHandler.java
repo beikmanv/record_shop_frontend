@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
+import com.northcoders.mvvmhttprequestswithretrofit.model.Artist;
 import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivityViewModel;
 import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivity;
 
@@ -36,6 +37,12 @@ public class UpdateAlbumClickHandler {
     // Method for the 'Submit' button click (Update button)
     public void onUpdateBtnClicked(View view) {
         Log.i("UpdateAlbumClickHandler", "Update button clicked.");
+
+        // Create an updated Album object with the current data
+        Artist updatedArtist = album.getArtist();  // Get the current Artist object
+        updatedArtist.setArtistId(album.getArtistId());  // Set the artistId from the Album
+        updatedArtist.setArtistName(album.getArtistName());  // Set the artistName from the Album
+
 
         // Create an updated Album object with the current data
         Album updatedAlbum = new Album(
