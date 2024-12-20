@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.northcoders.mvvmhttprequestswithretrofit.service.AlbumApiService;
@@ -110,7 +109,7 @@ public class AlbumRepository {
         });
     }
 
-    public void updateAlbum(int id, Album album) {
+    public void updateAlbum(Long id, Album album) {
         AlbumApiService albumApiService = RetrofitInstance.getService(); // Get the AlbumApiService instance
         Call<Album> call = albumApiService.updateAlbum(id, album); // Call the update method
 
@@ -133,7 +132,7 @@ public class AlbumRepository {
         });
     }
 
-    public void deleteAlbum(int id) {
+    public void deleteAlbum(Long id) {
         AlbumApiService albumApiService = RetrofitInstance.getService(); // Get the AlbumApiService instance
         Call<Void> call = albumApiService.deleteAlbum(id); // Call the delete method
 

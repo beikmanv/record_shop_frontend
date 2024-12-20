@@ -1,9 +1,12 @@
 package com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum;
 
+import static com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivity.ALBUM_KEY;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.databinding.DataBindingUtil;
@@ -13,44 +16,46 @@ import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
 import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivityViewModel;
 
 public class UpdateAlbumActivity extends AppCompatActivity {
-
-    private UpdateAlbumClickHandler handler;
-    private Album album;  // Album object that will be updated
-    private static final String ALBUM_KEY = "album";  // The key for passing the Album object
-    private ActivityUpdateAlbumBinding binding;  // The view binding
-    private MainActivityViewModel viewModel;  // The ViewModel for the activity
+    private ActivityUpdateAlbumBinding binding;  // Binding object for the layout
+    private UpdateAlbumClickHandler handler;  // Click handler for actions like update or delete
+    private Album album;  // The album object to be updated
+    private MainActivityViewModel viewModel;  // ViewModel for the activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_album);  // Set the layout for the activity
 
-        // Retrieve the Album object from the Intent using the key "album"
-        album = getIntent().getParcelableExtra(ALBUM_KEY);
-
-        // Retrieve data from the Intent
+        // Set up data binding
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_album);
+        // Retrieve the Intent that started this activity
         Intent intent = getIntent();
-        if (intent != null) {
-            String albumId = intent.getStringExtra("albumId"); // Key must match
-            if (albumId != null) {
-                // Use the album title to fetch or display data
-                Log.d("UpdateAlbumActivity", "Album received: " + album.getTitle());
-            } else {
-                Toast.makeText(this, "Album ID not found", Toast.LENGTH_SHORT).show();
-            }
+        // Attempt to get the 'Album' object from the Intent
+        album = getIntent().getParcelableExtra(ALBUM_KEY, Album.class);
+
+        // Check if the Album is null
+        if (album == null) {
+            // Log the error to help with debugging
+            Log.e("IntentLog", "Album is null, cannot proceed");
+            // Show a user-friendly message in the UI (Toast)
+            Toast.makeText(this, "Error: Album data not found.", Toast.LENGTH_SHORT).show();
+            // Optionally, finish the activity if the album is essential
+            finish();
+            return; // exit the onCreate method to prevent further actions
         } else {
-            Toast.makeText(this, "Intent is null", Toast.LENGTH_SHORT).show();
+            // Log the album details for debugging purposes
+            Log.d("IntentLog", "Album ID: " + album.getAlbumId());
+            Log.d("IntentLog", "Album Title: " + album.getTitle());
         }
 
-        // Initialize ViewModel using ViewModelProvider
+        // Set up the ViewModel
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        // Set up DataBinding for the activity
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_album);
-        // Create an instance of UpdateAlbumClickHandler, passing Album, Context, and ViewModel
+        // Initialize the click handler and pass the album object, context, and ViewModel
         handler = new UpdateAlbumClickHandler(album, this, viewModel);
-        // Bind the Album object to the layout so that changes reflect in the UI
+        // Bind the album data to the layout
         binding.setAlbum(album);
-        // Bind the click handler to the layout to handle actions like saving the updated album
+        // Bind the click handler for actions (e.g., update, delete)
         binding.setClickHandler(handler);
     }
+
+
 }

@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     private MainActivityViewModel mainActivityViewModel;
     private ActivityMainBinding binding;
     private AlbumRepository albumRepository;
+    public static final String ALBUM_KEY = "album";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +63,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
         albumAdapter.notifyDataSetChanged();
     }
 
-
-    // Handle item clicks in the RecyclerView
     @Override
     public void onItemClick(int position) {
         // Create an Intent to navigate to UpdateAlbumActivity
         Intent intent = new Intent(MainActivity.this, UpdateAlbumActivity.class);
         // Pass the selected Album object as a Parcelable
-        intent.putExtra("ALBUM_KEY", albumList.get(position));
-
+        intent.putExtra(ALBUM_KEY , albumList.get(position));
         // Start the UpdateAlbumActivity
         startActivity(intent);
     }

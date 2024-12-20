@@ -39,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:scaleType="centerCrop"
                 android:background="@color/image_background"
-                android:src="@{album.imageResource}" /> <!-- Bind the album image URL -->
+                android:src="@drawable/album5" /> <!-- Bind the album image URL -->
 
             <!-- Album Title -->
             <TextView

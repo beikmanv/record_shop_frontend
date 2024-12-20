@@ -1,7 +1,10 @@
 package com.northcoders.mvvmhttprequestswithretrofit.model;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.databinding.BaseObservable;
@@ -14,8 +17,8 @@ import java.util.Locale;
 
 public class Album extends BaseObservable implements Parcelable {
 
-    private int albumId;
-    private int artistId;
+    private Long albumId;
+    private Long artistId;
     private Artist artist;
     private String artistName; // For GET response only
     private String title;
@@ -26,11 +29,11 @@ public class Album extends BaseObservable implements Parcelable {
     private String createdAt;
     private String updatedAt;
     private String message;
-    private String imageResource;
+//    private String imageResource;
 
     // Main Constructor
-    public Album(int albumId, int artistId, Artist artist, String artistName, String title, String genre, int releaseYear,
-                 int stock, double price, String createdAt, String updatedAt, String message, String imageResource) {
+    public Album(Long albumId, Long artistId, Artist artist, String artistName, String title, String genre, int releaseYear,
+                 int stock, double price, String createdAt, String updatedAt, String message) {
         this.albumId = albumId;
         this.artistId = artistId;
         this.artist = artist;
@@ -43,7 +46,7 @@ public class Album extends BaseObservable implements Parcelable {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.message = message;
-        this.imageResource = imageResource;
+//        this.imageResource = imageResource;
     }
 
     // Default constructor for Parcelable
@@ -53,8 +56,8 @@ public class Album extends BaseObservable implements Parcelable {
 
     // Parcelable constructor
     protected Album(Parcel in) {
-        albumId = in.readInt();
-        artistId = in.readInt();
+        albumId = in.readLong();
+        artistId = in.readLong();
         artist = in.readParcelable(Artist.class.getClassLoader()); // Ensure Artist implements Parcelable
         artistName = in.readString();
         title = in.readString();
@@ -65,7 +68,10 @@ public class Album extends BaseObservable implements Parcelable {
         createdAt = in.readString();
         updatedAt = in.readString();
         message = in.readString();
-        imageResource = in.readString();
+
+        // Log the created object
+        Log.d(TAG, "Creating album from parcel: " + this.toString());
+
     }
 
     @Override
@@ -75,8 +81,8 @@ public class Album extends BaseObservable implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(albumId);
-        dest.writeInt(artistId);
+        dest.writeLong(albumId);
+        dest.writeLong(artistId);
         dest.writeParcelable(artist, flags); // Write Artist object (which should also implement Parcelable)
         dest.writeString(artistName);
         dest.writeString(title);
@@ -87,7 +93,10 @@ public class Album extends BaseObservable implements Parcelable {
         dest.writeString(createdAt);
         dest.writeString(updatedAt);
         dest.writeString(message);
-        dest.writeString(imageResource);
+//        dest.writeString(imageResource);
+
+        // Log the written object
+        Log.d(TAG, "Writing album to parcel: " + this.toString());
     }
 
     public static final Creator<Album> CREATOR = new Creator<Album>() {
@@ -104,21 +113,21 @@ public class Album extends BaseObservable implements Parcelable {
 
     // Getters and setters for the fields, using @Bindable for data binding
     @Bindable
-    public int getAlbumId() {
+    public Long getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(int albumId) {
+    public void setAlbumId(Long albumId) {
         this.albumId = albumId;
         notifyPropertyChanged(BR.albumId);
     }
 
     @Bindable
-    public int getArtistId() {
+    public Long getArtistId() {
         return artistId;
     }
 
-    public void setArtistId(int artistId) {
+    public void setArtistId(Long artistId) {
         this.artistId = artistId;
         notifyPropertyChanged(BR.artistId);
     }
@@ -229,13 +238,13 @@ public class Album extends BaseObservable implements Parcelable {
         notifyPropertyChanged(BR.message);
     }
 
-    @Bindable
-    public String getImageResource() {
-        return imageResource;
-    }
-
-    public void setImageResource(String imageResource) {
-        this.imageResource = imageResource;
-        notifyPropertyChanged(BR.imageResource);
-    }
+//    @Bindable
+//    public String getImageResource() {
+//        return imageResource;
+//    }
+//
+//    public void setImageResource(String imageResource) {
+//        this.imageResource = imageResource;
+//        notifyPropertyChanged(BR.imageResource);
+//    }
 }

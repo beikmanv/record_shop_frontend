@@ -1,7 +1,10 @@
 package com.northcoders.mvvmhttprequestswithretrofit.model;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Artist implements Parcelable {
 
@@ -24,7 +27,11 @@ public class Artist implements Parcelable {
     protected Artist(Parcel in) {
         artistId = in.readInt();  // Read artistId from Parcel
         artistName = in.readString();  // Read artistName from Parcel
+
+        // Log the created object
+        Log.d(TAG, "Creating artist from parcel: " + this.toString());
     }
+
 
     @Override
     public int describeContents() {
@@ -35,6 +42,9 @@ public class Artist implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(artistId);  // Write artistId to Parcel
         dest.writeString(artistName);  // Write artistName to Parcel
+
+        // Log the written object
+        Log.d(TAG, "Writing artist to parcel: " + this.toString());
     }
 
     // Creator to recreate the object from Parcel

@@ -2,11 +2,8 @@ package com.northcoders.mvvmhttprequestswithretrofit.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +12,8 @@ import com.bumptech.glide.Glide;
 import com.northcoders.mvvmhttprequestswithretrofit.R;
 import com.northcoders.mvvmhttprequestswithretrofit.databinding.AlbumItemBinding;
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
-import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.RecyclerViewInterface;
 import com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum.UpdateAlbumActivity;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.RecyclerViewInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,17 +21,16 @@ import java.util.Map;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
-    private ArrayList<Album> albumList;
+    private static ArrayList<Album> albumList;
     private final RecyclerViewInterface recyclerViewInterface;
     private Context context;
-//    private MediaPlayer mediaPlayer;
+
     private static final Map<String, Integer> imageResourceMap = new HashMap<>();
 
     public AlbumAdapter(Context context, ArrayList<Album> albumList, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.albumList = albumList;
         this.recyclerViewInterface = recyclerViewInterface;
-//        this.mediaPlayer = new MediaPlayer();
     }
 
     public void updateAlbums(ArrayList<Album> albums) {
@@ -71,32 +67,20 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public void onBindViewHolder(@NonNull AlbumViewHolder holder, int position) {
         Album album = albumList.get(position);
         holder.albumItemBinding.setAlbum(album); // Bind data
-        // Set album image using Glide
-        String imageName = album.getImageResource();
-        Integer imageResId = imageResourceMap.get(imageName);
-        if (imageResId != null) {
-            Glide.with(holder.itemView.getContext())
-                    .load(imageResId)
-                    .into(holder.albumItemBinding.albumImage);
-        } else {
-            Glide.with(holder.itemView.getContext())
-                    .load(R.drawable.album10)
-                    .into(holder.albumItemBinding.albumImage);
-        }
-        // Set up click listener for the item
-        holder.itemView.setOnClickListener(v -> {
-            if (context != null) {
-                Intent intent = new Intent(context, UpdateAlbumActivity.class);
-                intent.putExtra("albumId", album.getAlbumId()); // Pass album data
-                intent.putExtra("albumTitle", album.getTitle());
-                intent.putExtra("albumArtist", album.getArtistName());
-                context.startActivity(intent);
-            } else {
-                Toast.makeText(v.getContext(), "Context is null!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
+        // Set album image using Glide
+//        String imageName = album.getImageResource();
+////        Integer imageResId = imageResourceMap.get(imageName);
+//        if (imageResId != null) {
+//            Glide.with(holder.itemView.getContext())
+//                    .load(imageResId)
+//                    .into(holder.albumItemBinding.albumImage);
+//        } else {
+//            Glide.with(holder.itemView.getContext())
+//                    .load(R.drawable.album10)
+//                    .into(holder.albumItemBinding.albumImage);
+//        }
+    }
 
     @Override
     public int getItemCount() {
@@ -109,6 +93,20 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         public AlbumViewHolder(AlbumItemBinding albumItemBinding, RecyclerViewInterface recyclerViewInterface) {
             super(albumItemBinding.getRoot());
             this.albumItemBinding = albumItemBinding;
+
+            // Set up the click listener to navigate to UpdateAlbumActivity with the albumId
+            itemView.setOnClickListener(v -> {
+                if (recyclerViewInterface != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Album album = albumList.get(position); // Get the clicked album
+                        // Open UpdateAlbumActivity and pass only the albumId
+                        Intent intent = new Intent(v.getContext(), UpdateAlbumActivity.class);
+                        intent.putExtra("albumId", album.getAlbumId()); // Pass the albumId for updating or deleting
+                        v.getContext().startActivity(intent);
+                    }
+                }
+            });
         }
     }
 }

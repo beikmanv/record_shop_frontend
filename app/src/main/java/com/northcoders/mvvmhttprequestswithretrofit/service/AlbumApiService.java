@@ -21,13 +21,13 @@ public interface AlbumApiService {
 
     @PUT("album/{id}")
     Call<Album> updateAlbum(
-            @Path("id") int albumId,
+            @Path("id") Long albumId,
             @Body Album album
     );
 
     @DELETE("album/{id}")
     Call<Void> deleteAlbum(
-            @Path("id") int albumId
+            @Path("id") Long albumId
     );
 
 }
