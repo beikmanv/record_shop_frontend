@@ -23,9 +23,6 @@ public class AddAlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_new_album);
-//        album = new Album(album.getAlbumId(), album.getArtistId(), album.getArtist(), album.getArtistName(),
-//                album.getTitle(), album.getGenre(), album.getReleaseYear(), album.getStock(), album.getPrice(),
-//                album.getCreatedAt(), album.getUpdatedAt(), album.getMessage());
         album = new Album();
         album.setArtist(new Artist());
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);

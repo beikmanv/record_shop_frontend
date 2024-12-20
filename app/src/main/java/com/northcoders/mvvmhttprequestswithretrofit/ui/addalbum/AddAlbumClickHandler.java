@@ -39,8 +39,6 @@ public class AddAlbumClickHandler {
 
             viewModel.addAlbum(album);
             context.startActivity(intent);
-//            Toast.makeText(context, "Album added successfully", Toast.LENGTH_SHORT).show();
-//            ((AddAlbumActivity) context).finish(); // End the activity after submission
         }
     }
 

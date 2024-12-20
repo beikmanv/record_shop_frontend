@@ -18,8 +18,6 @@ public class UpdateAlbumActivity extends AppCompatActivity {
     private Album album;  // The album object to be updated
     private static final String ALBUM_KEY = "album";
 
-    // ViewModel for the activity
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +42,7 @@ public class UpdateAlbumActivity extends AppCompatActivity {
             Log.d("IntentLog", "Album Title: " + album.getTitle());
         }
 
+        // ViewModel for the activity
         MainActivityViewModel viewModel = new ViewModelProvider(this)
                 .get(MainActivityViewModel.class);
 

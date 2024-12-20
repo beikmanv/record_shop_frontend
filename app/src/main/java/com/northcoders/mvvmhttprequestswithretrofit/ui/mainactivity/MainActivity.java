@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-//        setContentView(binding.getRoot());
-        // Initialize ViewModel
         viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         handler = new MainActivityClickHandler(this);
         binding.setClickHandler(handler);
