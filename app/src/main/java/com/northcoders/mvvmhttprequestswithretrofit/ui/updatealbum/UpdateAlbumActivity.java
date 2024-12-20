@@ -1,8 +1,5 @@
 package com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum;
 
-import static com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivity.ALBUM_KEY;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,18 +16,19 @@ public class UpdateAlbumActivity extends AppCompatActivity {
     private ActivityUpdateAlbumBinding binding;  // Binding object for the layout
     private UpdateAlbumClickHandler handler;  // Click handler for actions like update or delete
     private Album album;  // The album object to be updated
-    private MainActivityViewModel viewModel;  // ViewModel for the activity
+//    private MainActivityViewModel viewModel;
+    private static final String ALBUM_KEY = "album";
+
+    // ViewModel for the activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Set up data binding
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_album);
-        // Retrieve the Intent that started this activity
-        Intent intent = getIntent();
-        // Attempt to get the 'Album' object from the Intent
         album = getIntent().getParcelableExtra(ALBUM_KEY, Album.class);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_album);
+
 
         // Check if the Album is null
         if (album == null) {
@@ -47,8 +45,9 @@ public class UpdateAlbumActivity extends AppCompatActivity {
             Log.d("IntentLog", "Album Title: " + album.getTitle());
         }
 
-        // Set up the ViewModel
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        MainActivityViewModel viewModel = new ViewModelProvider(this)
+                .get(MainActivityViewModel.class);
+
         // Initialize the click handler and pass the album object, context, and ViewModel
         handler = new UpdateAlbumClickHandler(album, this, viewModel);
         // Bind the album data to the layout

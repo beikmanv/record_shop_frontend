@@ -3,6 +3,7 @@ package com.northcoders.mvvmhttprequestswithretrofit.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -23,20 +24,17 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
     private static ArrayList<Album> albumList;
     private final RecyclerViewInterface recyclerViewInterface;
-    private Context context;
-
     private static final Map<String, Integer> imageResourceMap = new HashMap<>();
 
-    public AlbumAdapter(Context context, ArrayList<Album> albumList, RecyclerViewInterface recyclerViewInterface) {
-        this.context = context;
+    public AlbumAdapter(ArrayList<Album> albumList, RecyclerViewInterface recyclerViewInterface) {
         this.albumList = albumList;
         this.recyclerViewInterface = recyclerViewInterface;
     }
 
-    public void updateAlbums(ArrayList<Album> albums) {
-        this.albumList = albums;
-        notifyDataSetChanged();
-    }
+//    public void updateAlbums(ArrayList<Album> albums) {
+//        this.albumList = albums;
+//        notifyDataSetChanged();
+//    }
 
     static {
         imageResourceMap.put("album1", R.drawable.album1);
@@ -93,17 +91,14 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
         public AlbumViewHolder(AlbumItemBinding albumItemBinding, RecyclerViewInterface recyclerViewInterface) {
             super(albumItemBinding.getRoot());
             this.albumItemBinding = albumItemBinding;
-
-            // Set up the click listener to navigate to UpdateAlbumActivity with the albumId
-            itemView.setOnClickListener(v -> {
-                if (recyclerViewInterface != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        Album album = albumList.get(position); // Get the clicked album
-                        // Open UpdateAlbumActivity and pass only the albumId
-                        Intent intent = new Intent(v.getContext(), UpdateAlbumActivity.class);
-                        intent.putExtra("albumId", album.getAlbumId()); // Pass the albumId for updating or deleting
-                        v.getContext().startActivity(intent);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(position);
+                        }
                     }
                 }
             });

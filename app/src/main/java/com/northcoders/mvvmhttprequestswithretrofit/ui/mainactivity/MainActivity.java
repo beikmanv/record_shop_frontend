@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.northcoders.mvvmhttprequestswithretrofit.R;
 import com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter;
 import com.northcoders.mvvmhttprequestswithretrofit.databinding.ActivityMainBinding;
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
@@ -22,41 +25,42 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewInter
     private RecyclerView recyclerView;
     private ArrayList<Album> albumList = new ArrayList<>();
     private AlbumAdapter albumAdapter;
-    private MainActivityViewModel mainActivityViewModel;
+    private MainActivityViewModel viewModel;
     private ActivityMainBinding binding;
     private AlbumRepository albumRepository;
-    public static final String ALBUM_KEY = "album";
+    private static final String ALBUM_KEY = "album";
+    private MainActivityClickHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+//        setContentView(binding.getRoot());
         // Initialize ViewModel
-        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        // Initialize AlbumRepository
-        albumRepository = new AlbumRepository(getApplication());
-        // Observe the LiveData and get the list of albums
+        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        handler = new MainActivityClickHandler(this);
+        binding.setClickHandler(handler);
         getAllAlbums();
     }
 
     private void getAllAlbums() {
-        mainActivityViewModel.getAlbums().observe(this, new Observer<List<Album>>() {
+        viewModel.getAlbums().observe(this, new Observer<List<Album>>() {
             @Override
             public void onChanged(List<Album> albumsFromLiveData) {
-                if (albumsFromLiveData != null && !albumsFromLiveData.isEmpty()) {
-                    albumList.clear();
-                    albumList.addAll(albumsFromLiveData);
+//                if (albumsFromLiveData != null && !albumsFromLiveData.isEmpty()) {
+//                    albumList.clear();
+//                    albumList.addAll(albumsFromLiveData);
+                        albumList = (ArrayList<Album>) albumsFromLiveData;
                     displayInRecyclerView();
                 }
-            }
+//            }
         });
     }
 
     private void displayInRecyclerView() {
         recyclerView = binding.recyclerView;
         // Pass "this" as the RecyclerViewInterface to handle clicks
-        albumAdapter = new AlbumAdapter(this, albumList, this);
+        albumAdapter = new AlbumAdapter(albumList, this);
         recyclerView.setAdapter(albumAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
