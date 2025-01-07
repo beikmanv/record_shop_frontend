@@ -3,8 +3,8 @@
     <string name="album_cover">Album Cover</string>
     <string name="add_album">Add Album</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="post">Post</string>
     <string name="update">Update</string>
     <string name="delete">Delete</string>
+    <string name="home">home</string>
 </resources>

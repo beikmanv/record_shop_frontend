@@ -19,6 +19,10 @@ import com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter;
 import com.northcoders.mvvmhttprequestswithretrofit.databinding.ActivityMainBinding;
 import com.northcoders.mvvmhttprequestswithretrofit.model.Album;
 import com.northcoders.mvvmhttprequestswithretrofit.model.AlbumRepository;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.fragments.DeleteAlbumFragment;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.fragments.HomeFragment;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.fragments.PostAlbumFragment;
+import com.northcoders.mvvmhttprequestswithretrofit.ui.fragments.UpdateAlbumFragment;
 import com.northcoders.mvvmhttprequestswithretrofit.ui.updatealbum.UpdateAlbumActivity;
 
 import java.util.ArrayList;
@@ -35,10 +39,59 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 //    private static final String ALBUM_KEY = "album";
 //    private MainActivityClickHandler handler;
 
+    NavigationBarView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        // Set a listener for when the navigation items are selected
+        bottomNavigationView.setOnItemSelectedListener(this);
+
+        // This sets the selected item id when the view is created
+        bottomNavigationView.setSelectedItemId(R.id.home);
+    }
+
+    DeleteAlbumFragment deleteAlbumFragment = new DeleteAlbumFragment();
+    PostAlbumFragment postAlbumFragment = new PostAlbumFragment();
+    UpdateAlbumFragment updateAlbumFragment = new UpdateAlbumFragment();
+    HomeFragment homeFragment = new HomeFragment();
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.home) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, homeFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.delete) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, deleteAlbumFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.post) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, postAlbumFragment)
+                    .commit();
+            return true;
+        } else if (itemId == R.id.update) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flFragment, updateAlbumFragment)
+                    .commit();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 //        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -46,12 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 //        handler = new MainActivityClickHandler(this);
 //        binding.setClickHandler(handler);
 //        getAllAlbums();
-    }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
-    }
 
 //    private void getAllAlbums() {
 //        viewModel.getAlbums().observe(this, new Observer<List<Album>>() {
