@@ -2,4 +2,9 @@
     <string name="app_name">MVVM HTTP Requests with Retrofit</string>
     <string name="album_cover">Album Cover</string>
     <string name="add_album">Add Album</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_post_fragment">Hello Post Fragment</string>
+    <string name="hello_update_fragment">Hello Update Fragment</string>
+    <string name="hello_delete_fragment">Hello Delete Fragment</string>
 </resources>
