@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         }
     }
 
-
 //        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 //        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 //        handler = new MainActivityClickHandler(this);

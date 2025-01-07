@@ -29,8 +29,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:itemIconSize="50sp"
             android:id="@+id/bottomNavigationView"
-            app:menu="@menu/bottom_nav_menu" />
-
+            android:background="@color/genre_text_color"
+            app:menu="@menu/bottom_nav_menu"
+            />
+        <!--app:itemIconTint="@color/genre_text_color"
+         app:itemTextColor="@color/design_default_color_on_primary"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

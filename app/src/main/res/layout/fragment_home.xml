@@ -1,53 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.HomeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- The data section where variables for binding will be declared
     <data>
-        <variable
-            name="albumAdapter"
-            type="com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter" />
+        <!-- Declare binding variables if necessary -->
+    </data>
 
-        <variable
-            name="clickHandler"
-            type="com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivityClickHandler" />
-    </data> -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.HomeFragment">
 
-    <!--
-       <androidx.recyclerview.widget.RecyclerView
-           android:id="@+id/recyclerView"
-           android:layout_width="0dp"
-           android:layout_height="0dp"
-           android:layout_margin="8dp"
-           app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           android:background="@color/recycler_view_background"
-           app:adapter="@{albumAdapter}" />
+        <!-- RecyclerView for displaying albums -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/recycler_view_background" />
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:textSize="36sp"
-           android:textColor="@android:color/black"
-           app:layout_constraintBottom_toTopOf="@id/recyclerView"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
+        <!-- FloatingActionButton to add a new album -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@android:drawable/ic_input_add"
+            android:contentDescription="@string/add_album"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="onFABClicked" />
 
-       <com.google.android.material.floatingactionbutton.FloatingActionButton
-           android:onClick="@{clickHandler::onFABClicked}"
-           android:id="@+id/floatingActionButton"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginBottom="16dp"
-           android:layout_marginEnd="16dp"
-           android:src="@android:drawable/ic_input_add"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:layout_constraintEnd_toEndOf="parent" /> -->
-
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
