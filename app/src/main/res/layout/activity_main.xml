@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- The data section where variables for binding will be declared -->
+    <!-- The data section where variables for binding will be declared
     <data>
         <variable
             name="albumAdapter"
             type="com.northcoders.mvvmhttprequestswithretrofit.adapter.AlbumAdapter" />
-        <!-- Declare the click handler -->
+
         <variable
             name="clickHandler"
             type="com.northcoders.mvvmhttprequestswithretrofit.ui.mainactivity.MainActivityClickHandler" />
-    </data>
+    </data> -->
 
     <!-- Main ConstraintLayout containing the RecyclerView -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,17 @@
         android:background="@color/background_color"
         tools:context=".ui.mainactivity.MainActivity">
 
-        <!-- RecyclerView that will display the list of albums -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:itemIconSize="50sp"
+            android:id="@+id/bottomNavigationView"
+            app:menu="@menu/bottom_nav_menu" />
+
+    <!--
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
@@ -35,7 +45,6 @@
             android:background="@color/recycler_view_background"
             app:adapter="@{albumAdapter}" />
 
-        <!-- TextView that might display any relevant message, placed at the top or bottom -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +55,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Floating Action Button (FAB) -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:onClick="@{clickHandler::onFABClicked}"
             android:id="@+id/floatingActionButton"
@@ -56,7 +64,7 @@
             android:layout_marginEnd="16dp"
             android:src="@android:drawable/ic_input_add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" /> -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

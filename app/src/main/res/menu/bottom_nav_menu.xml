@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/delete"
+        android:title="@string/hello_delete_fragment"
+        android:icon="@drawable/ic_delete_foreground"
+        />
+
+    <item
+        android:id="@+id/post"
+        android:title="@string/hello_post_fragment"
+        android:icon="@drawable/ic_post_foreground"
+        />
+
+    <item
+        android:id="@+id/update"
+        android:title="@string/hello_update_fragment"
+        android:icon="@drawable/ic_update_foreground"
+        />
+
+</menu>
